@@ -1,0 +1,84 @@
+Fitur yang mungkin bisa ditambahkan
+- Utterances -> context pada masing masing file history
+  misal dalam satu file ada 4 putaran/masih dalam context tsb
+
+
+________Attention Mechanism__________
+merupakan sebuah cara untuk memfokuskan perhatian dalam menanggapi pertanyaan
+Misalnya : 
+Ada sebuah foto guru dan murid. Jika ada pertanyaan "Berapa jumlah orang difoto ?",
+Maka otomatis otak kita akan menghitung tanpa memperhatikan hal lain
+Jika ada pertanyaan "Siapa guru yang ada di foto?" 
+Maka otomatis kita akan menambahkan fitur orang dewasa dalam memilihnya
+
+________CNN ranking__________________
+1. Relevasni antara query masukan dan kandidat response, frasa kunci memegang peranan besar
+   dan kata yang tidak berhubungan akan diabaikan
+2. Attention polling untuk mempelajari bobot tiap kata
+3. Menggunakan Full-connected layer untuk menghitung relevansi kandidat response
+   menggunakan cross entropy sebagai point-wise ranking loss (jga bisa menggunakan fungsi lain)
+
+ConvNets are used mainly to look for patterns in an image, we don’t need 
+to give features, the CNN understands the right features by itself as it goes 
+deep.this is one of the reasons why we need CNN’s. Period.
+
+Tahap CNN 
+1. Feature Extraction
+   Proses encoding dari raw data menjadi vector
+2. Stride
+   Adalah parameter yang menentukan berapa jumlah pergeseran filter.
+   Jika nilai stride 1 maka conv filter akan begeser satu pixel.
+   Semakin kecil stride akan semakin detail informasi yang didapat namun tidak akan selalu mendapatkan performa bagus
+3. Padding
+   
+4. Polling Layer
+5. Fully Connected Layer
+
+
+___________SEQUENTIAL MATCHING NETWORK___________________________
+Misalkan
+Data Utterances:
+{
+    "message": "Saya mau refund ",
+    "response": " utk kode booking apa"
+  },
+  {
+    "message": "Kode SUYYWY ",
+    "response": " SUYYWY apabila di refund kembali 5500"
+  },
+  {
+    "message": "Iya gpp ",
+    "response": " sdh fix di refund  proses pengembalian sekitarminggu"
+  },
+  {
+    "message": "Sudah ",
+    "response": " baik  kami refund"
+  },
+  {
+    "message": "Prosedur nyq bagaimana ",
+    "response": " ini bisa lgsg kami proseskan silakan di kirimkan no rek nya apabila sdh cair akan kami transfer Arief rachman asyari020010007245bri an arief rachman asyari baik refund sdh kami proses"
+  },
+  {
+    "message": "sd minggu ya ",
+    "response": " benar"
+  },
+  {
+    "message": "Ok makasih ",
+    "response": " baik"
+  }
+
+Test Chat:
+User : saya mau refund tiket
+Mona :  utk kode booking apa
+User : SUYYWY
+Mona :  SUYYWY apabila di refund kembali 5500
+User : iya gp
+Mona :   atau bapak masih di indomaret kami telepon bisa disambungkan ke kasirnya Mohon dibantu  menginformasikan kode reservasi atau nomor invoice pemesanan Anda supaya  kami bisa membantu mengecek terlebih dahulu
+User : iya gpp
+Mona :  sdh fix di refund  proses pengembalian sekitarminggu
+User : sudah
+---------------------------
+Mona :  jika sudah muncul harga  harga nya silahkan di klik pilih pesan kemudian  klik lanjutkan proses booking
+
+Harusnya responnya adalah :
+baik  kami refund
