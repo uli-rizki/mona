@@ -1,36 +1,56 @@
 #!/usr/bin/python
 
-import numpy as np
-from keras.datasets import imdb
-from keras import preprocessing
+from string import punctuation
+from string import maketrans
+from os import listdir
+from gensim.models import Word2Vec
 
-def simple_one_hot_encoding():
-  samples = ['The cat sat on the mat', 'The dog ate my homework']
+# load doc into memory
+def load_doc(filename):
+	# open the file as read only
+	file = open(filename, 'r')
+	# read all text
+	text = file.read()
+	# close the file
+	file.close()
+	return text
 
-  token_index = {}
-  for sample in samples:
-    for word in sample.split():
-      if word not in token_index:
-        token_index[word] = len(token_index) + 1
+# turn a doc into clean tokens
+def doc_to_clean_lines(doc, vocab):
+	clean_lines = list()
+	lines = doc.splitlines()
+	for line in lines:
+		# split into tokens by white space
+		tokens = line.split()
+		table = maketrans('', '')
+    tokens = [w.translate(table) for w in tokens]
+    tokens = [word for word in tokens if len(word) > 1]
+		clean_lines.append(tokens)
+	return clean_lines
 
-  max_length = 10
+# load all docs in a directory
+def process_docs(directory, vocab, is_trian):
+	lines = list()
+	# walk through all files in the folder
+	for filename in listdir(directory):
+		path = directory + '/' + filename
+		# load and clean the doc
+		doc = load_doc(path)
+		doc_lines = doc_to_clean_lines(doc, vocab)
+		# add lines to list
+		lines += doc_lines
+	return lines
 
-  results = np.zeros(shape=(len(samples), max_length, max(token_index.values()) + 1))
+# load the vocabulary
+vocab_filename = 'vocab.txt'
+vocab = load_doc(vocab_filename)
+vocab = vocab.split()
+vocab = set(vocab)
 
-  for i, sample in enumerate(samples):
-    for j, word in list(enumerate(sample.split())) [:max_length]:
-      index = token_index.get(word)
-      results[i, j, index] = 1
-  
-  return results
+april = process_docs('../Datasets/April', vocab, True)
+march = process_docs('../Datasets/March', vocab, True)
+may = process_docs('../Datasets/May', vocab, True)
 
-# print(simple_one_hot_encoding())
+sentences = april + march + may
 
-max_features = 1000
-maxlen = 20
-
-(x_train, y_train), (x_test, y_test) = imdb.load_data(num_words = max_features)
-
-x_train = preprocessing.sequence.pad_sequences(x_train, maxlen=maxlen)
-
-print(x_train)
+print('Total training sentences: %d' % len(sentences))

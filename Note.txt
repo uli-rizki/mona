@@ -1,3 +1,23 @@
+Skenario
+- pilih satu tema misalnya tentang refund
+- buat pattern atau sequnce dan labeli misalkan 5
+- lakukan perangkingan
+- untuk pertanyaan berbasis task, bisa di kaish alasan kedepannta akan di cek
+namun untuk saat ini masih dalam lingkup dataset saja
+4 cara booking
+9 refund
+13 reschedule
+16 refund
+29 refund
+36 reschedule
+63 refund
+77 reschedule
+79 refund
+80 reschedule
+108 reschedule
+
+
+
 Fitur yang mungkin bisa ditambahkan
 - Utterances -> context pada masing masing file history
   misal dalam satu file ada 4 putaran/masih dalam context tsb

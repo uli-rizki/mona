@@ -16,10 +16,6 @@ import random
 
 def talk_to_cb_primary(test_set_sentence, minimum_score , json_file_path , tfidf_vectorizer_pikle_path ,tfidf_matrix_train_pikle_path):
    
-   # json_file_path = "data/convertcsv.json"
-
-   # tfidf_vectorizer_pikle_path = "data/tfidf_vectorizer.pickle"
-   # tfidf_matrix_train_pikle_path ="data/tfidf_matrix_train.pickle"
     test_set = (test_set_sentence, "")
 
     try:
@@ -43,12 +39,14 @@ def talk_to_cb_primary(test_set_sentence, minimum_score , json_file_path , tfidf
 
     cosine = np.delete(cosine, 0)
     max = cosine.max()
-    response_index = 0
+    # response_index = 0
+    response_index = []
     if (max > minimum_score):
         new_max = max - 0.01
         list = np.where(cosine > new_max)
         # print ("number of responses with 0.01 from max = " + str(list[0].size))
-        response_index = random.choice(list[0])
+        # response_index = random.choice(list[0])
+        response_index = list[0]
     else :
         return "live_chat" , 0
            
@@ -59,32 +57,30 @@ def talk_to_cb_primary(test_set_sentence, minimum_score , json_file_path , tfidf
        
 
     j = 0
-
+    
     with open(json_file_path, "r") as sentences_file:
         reader = json.load(sentences_file)
-        for row in reader:
-            j += 1  # we begin with 1 not 0 &    j is initialized by 0
-            if j == response_index:
+        for i in response_index:
+            print reader[i-1]
 
-                #if delimeter in row[1]:
-                #    # get newest suggestion
-                #    answer_row = row[1].split(delimeter)
-                #    row[1] = answer_row[1]
+    # with open(json_file_path, "r") as sentences_file:
+    #     reader = json.load(sentences_file)
+    #     for row in reader:
+    #         j += 1  # we begin with 1 not 0 &    j is initialized by 0
 
-                #else:  # add new suggestion
-                #    note = "just return old original suggestion"
+    #         if j == response_index:
 
-                return row["response"], max
-                break
+    #             #if delimeter in row[1]:
+    #             #    # get newest suggestion
+    #             #    answer_row = row[1].split(delimeter)
+    #             #    row[1] = answer_row[1]
 
+    #             #else:  # add new suggestion
+    #             #    note = "just return old original suggestion"
 
-#def previous_chats(query):
-#    minimum_score = 0.7
-#    file = "data/previous_chats.json"
-#    tfidf_vectorizer_pikle_path = "data/previous_tfidf_vectorizer.pickle"
-#    tfidf_matrix_train_path = "data/previous_tfidf_matrix_train.pickle"
-#    query_response, score = talk_to_cb_primary(query , minimum_score , file , tfidf_vectorizer_pikle_path , tfidf_matrix_train_path)
-#    return query_response , score
+    #             return row["response"], max
+    #             break
+
 
 def train_chat(json_file_path, tfidf_vectorizer_pikle_path , tfidf_matrix_train_pikle_path):
         
@@ -127,21 +123,15 @@ def train_chat(json_file_path, tfidf_vectorizer_pikle_path , tfidf_matrix_train_
         # -----------------------------------------#
 
 
-# def previous_chats(query):
-#   minimum_score = 0.7
-#   file = "data/conversation.json"
-#   print(len(file))
-#   exit
-#   tfidf_vectorizer_pikle_path = "data/previous_tfidf_vectorizer.pickle"
-#   tfidf_matrix_train_path = "data/previous_tfidf_matrix_train.pickle"
-#   query_response, score = talk_to_cb_primary(query , minimum_score , file , tfidf_vectorizer_pikle_path , tfidf_matrix_train_path)
-#   return query_response
+def previous_chats(query):
+  minimum_score = 0.5
+  file = "data/conversation.json"
+  tfidf_vectorizer_pikle_path = "data/previous_tfidf_vectorizer.pickle"
+  tfidf_matrix_train_path = "data/previous_tfidf_matrix_train.pickle"
+  query_response, score = talk_to_cb_primary(query , minimum_score , file , tfidf_vectorizer_pikle_path , tfidf_matrix_train_path)
+  return query_response
 
+previous_chats("cara booking tiket")
 # while 1:
 #   sent = raw_input("User : ")
 #   print "Mona :", previous_chats(sent)
-
-with open("data/conversation.json") as f :
-    data = json.load(f)
-
-print(len(data))
