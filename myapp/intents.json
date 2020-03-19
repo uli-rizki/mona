@@ -1,0 +1,23 @@
+{"intents": [
+  {"context": "Sy sdh beli tiket penerbangan dr Makassar ke Yogyakarta tanggal 8 April dengan pswt Sriwijaya Air Apakah tiket tsb bisa diganti dgn Lion Air dengan haru yg sama Sokusix bgmn",
+   "response_1": "kalo pindah maskapai tidak bisa",
+   "response_0": "bisa tp ada biaya penambahann utk kode booking bisa di sebutkan"
+  },
+  {"context": "Halo saya mau rubah jadwal",
+   "response_1": "Mohon dibantu menginformasikan kode reservasi atau nomor invoice pemesanan Anda supaya kami bisa membantu mengecek terlebih dahulu",
+   "response_0": "Diubah ke tanggal berapa"
+  },
+  {"context": "Saya Thia mau reschedule tiket citilink saya bisa jadi jam pagi ke CGK",
+   "response_1": "selamat malam ibu Thia baikbisa dibantu untuk kode bookingnya",
+   "response_0": "Untuk tanggalnya sama hanya jam saja begitu"
+  },
+  {"context": "Maaf mau tanya biasanya booking di arena tiket bisa sampe hari kok belakangan ini sudah tidak bisa ya",
+   "response_1": "kalau utk time limit dari sistem maskapai nya bu",
+   "response_0": "kalau utk time limit dari sistem maskapai nya bu jadi otomatis dari maskapai"
+  },
+  {"context": "Tiket pesawat batik",
+   "response_1": "Iya bagaimana pak",
+   "response_0": "Mohon maaf Ibu untuk pengecekan jadwal keberangkatan promo harga tiket dan pemesanan tiket silahkan langsung"
+  }
+]
+}

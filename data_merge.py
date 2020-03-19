@@ -21,8 +21,8 @@ def createDir(dir):
           raise
 
 #___________START INITIALIZE__________
-path = "../Datasets/April"
-pathMerge = "../Datasets/april.txt"
+path = "../Datasets/May"
+pathMerge = "../Datasets/may.txt"
 files = []
 
 #_______MAKE FILES IN ARRAY___________

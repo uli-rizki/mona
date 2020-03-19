@@ -22,7 +22,7 @@ def createDir(dir):
           raise
 
 #___________START INITIALIZE__________
-path = "../Datasets/april.txt"
+path = "../Datasets/may.txt"
 
 pairs = readFile(path)
 pairs2list = pairs.split('\n')
@@ -30,9 +30,10 @@ pairs2list = pairs.split('\n')
 pairsJson = []
 for item in pairs2list:
   itemSplit = item.split('?')
-  pairsObj = {"message": itemSplit[0], "response": itemSplit[1]}
+  if len(itemSplit) > 1:
+    pairsObj = {"message": itemSplit[0], "response": itemSplit[1]}
 
   pairsJson.append(pairsObj)
 
-with open('conversation.json', 'w') as f:
+with open('may.json', 'w') as f:
     json.dump(pairsJson, f)
